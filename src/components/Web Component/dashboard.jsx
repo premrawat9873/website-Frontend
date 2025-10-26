@@ -16,7 +16,7 @@ export default function Dashboard() {
       navigate("/signin");
       return;
     }
-    axios.get("http://localhost:3000/api/v1/users/me", {
+    axios.get("https://backend-website-6g6y.vercel.app/api/v1/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +34,7 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
     if (!token) return;
     axios
-      .get("http://localhost:3000/api/v1/account/balance", {
+      .get("https://backend-website-6g6y.vercel.app/api/v1/account/balance", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setBalance(res.data.balance))

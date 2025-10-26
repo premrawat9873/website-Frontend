@@ -26,7 +26,7 @@ export default function Payment() {
       return;
     }
     axios
-      .get("http://localhost:3000/api/v1/users/me", {
+      .get("https://backend-website-6g6y.vercel.app/api/v1/users/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,7 +58,7 @@ export default function Payment() {
       const token = localStorage.getItem("token"); // stored after login
 
       const response = await axios.post(
-        "http://localhost:3000/api/v1/account/transfer",
+        "https://backend-website-6g6y.vercel.app/api/v1/account/transfer",
         {
           amount: Number(amount),
           to: user._id, // or user.userId depending on your backend

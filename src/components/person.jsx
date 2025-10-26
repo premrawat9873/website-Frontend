@@ -18,7 +18,7 @@ export default function Person() {
             return;
         }
 
-        axios.get("http://localhost:3000/api/v1/users/bulk", {
+        axios.get("https://backend-website-6g6y.vercel.app/api/v1/users/bulk", {
             headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
