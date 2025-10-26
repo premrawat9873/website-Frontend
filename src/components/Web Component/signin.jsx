@@ -17,10 +17,15 @@ export default function Signin({ url }) {
 
   const handleSignin = async () => {
     try {
-      const res = await axios.post("https://backend-website-6g6y.vercel.app/api/v1/users/signin", {
-        username: email,
-        password
-      });
+    const res = await axios.post(
+      "https://backend-website-6g6y.vercel.app/api/v1/users/signin",
+      { username: email, password }, // <-- body object must exist
+      {
+        headers: {
+          "Content-Type": "application/json" // explicit header is good practice
+        }
+      }
+    );
 
       if (res.data.token || res.data.tokken || res.data.Tokken) {
         const token = res.data.token || res.data.tokken || res.data.Tokken;
