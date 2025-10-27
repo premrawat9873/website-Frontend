@@ -22,7 +22,7 @@ export default function Person() {
             headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-            setPersons(res.data.user || []);
+            setPersons(res.data?.users || []);
         })
         .catch((err) => {
             console.error("Error fetching users:", err);
