@@ -11,22 +11,24 @@ function App() {
   const token = useRecoilValue(tokenState);
 
   return (
-    <Routes>
-      {!token ? (
-        <>
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<Navigate to="/signin" />} />
-        </>
-      ) : (
-        <>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="*" element={<Navigate to="/dashboard" />} />
-        </>
-      )}
-    </Routes>
+    <div className="min-h-screen w-full overflow-x-hidden bg-zinc-900 text-white">
+      <Routes>
+        {!token ? (
+          <>
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="*" element={<Navigate to="/signin" />} />
+          </>
+        ) : (
+          <>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
+          </>
+        )}
+      </Routes>
+    </div>
   );
 }
 

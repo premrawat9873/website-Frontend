@@ -76,7 +76,7 @@ export default function Person({ search }) {
   };
 
   return (
-    <div className="flex flex-col items-center w-full px-2 sm:px-4 md:px-6 lg:px-10 transition-opacity duration-500">
+    <div className="flex flex-col items-center w-full px-2 sm:px-4 md:px-6 lg:px-10 transition-opacity duration-500 overflow-x-hidden">
       {loading ? (
         // 💀 Skeleton Loader
         Array.from({ length: 5 }).map((_, i) => (
