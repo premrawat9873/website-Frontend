@@ -76,14 +76,15 @@ export default function Person({ search }) {
   };
 
   return (
-    <div className="flex flex-col items-center transition-opacity duration-500">
+    <div className="flex flex-col items-center w-full px-2 sm:px-4 md:px-6 lg:px-10 transition-opacity duration-500">
       {loading ? (
         // 💀 Skeleton Loader
         Array.from({ length: 5 }).map((_, i) => (
           <div
             key={i}
-            className="flex justify-between items-center h-20 w-350 pl-10 pr-5 mt-5 
-                       bg-zinc-700/40 backdrop-blur-md rounded-2xl shadow-md animate-pulse"
+            className="flex justify-between items-center h-20 w-full sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] 
+                       pl-6 pr-4 mt-5 bg-zinc-700/40 backdrop-blur-md 
+                       rounded-2xl shadow-md animate-pulse"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gray-600"></div>
@@ -96,9 +97,10 @@ export default function Person({ search }) {
         currentUsers.map((p, index) => (
           <div
             key={index}
-            className="flex justify-between items-center h-20 w-350 pl-10 pr-5 mt-5 
-                       bg-zinc-700/50 backdrop-blur-md rounded-2xl shadow-lg 
-                       transition-all duration-300 hover:shadow-xl hover:scale-[1.01]"
+            className="flex justify-between items-center h-20 w-full sm:w-[97%] md:w-[97%] lg:w-[97%] xl:w-[97%] 
+                       pl-6 pr-5 mt-5 bg-zinc-700/50 backdrop-blur-md 
+                       rounded-2xl shadow-lg transition-all duration-300 
+                       hover:shadow-xl hover:scale-[1.01]"
           >
             <AllUsers p={p} onClick={() => handlePaymentClick(p)} />
           </div>
@@ -109,11 +111,11 @@ export default function Person({ search }) {
 
       {/* 🔘 Pagination Controls */}
       {!loading && filteredPersons.length > 0 && (
-        <div className="flex justify-center items-center gap-4 mt-8">
+        <div className="flex justify-center items-center gap-4 mt-8 flex-wrap">
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg border border-gray-600 text-white 
+            className={`px-4 py-2 rounded-lg border border-gray-600 text-white text-sm sm:text-base
               ${
                 currentPage === 1
                   ? "opacity-40 cursor-not-allowed"
@@ -122,13 +124,13 @@ export default function Person({ search }) {
           >
             ← Previous
           </button>
-          <span className="text-gray-300">
+          <span className="text-gray-300 text-sm sm:text-base">
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg border border-gray-600 text-white 
+            className={`px-4 py-2 rounded-lg border border-gray-600 text-white text-sm sm:text-base
               ${
                 currentPage === totalPages
                   ? "opacity-40 cursor-not-allowed"
@@ -153,10 +155,10 @@ function AllUsers({ p, onClick }) {
   return (
     <>
       <div className="flex items-center gap-3">
-        <button className="text-black text-2xl w-10 h-10 rounded-full bg-white font-semibold">
+        <button className="text-black text-xl sm:text-2xl w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white font-semibold">
           {initials || first.charAt(0)}
         </button>
-        <h1 className="text-white text-lg">
+        <h1 className="text-white text-base sm:text-lg md:text-xl">
           {first} {last}
         </h1>
       </div>

@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [loadingBalance, setLoadingBalance] = useState(true);
   const navigate = useNavigate();
 
-  // 🧍‍♂️ Fetch user info with cache
+  // 🧍‍♂️ Fetch user info
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -23,7 +23,7 @@ export default function Dashboard() {
     const cachedUser = localStorage.getItem("cachedUser");
     if (cachedUser) {
       const parsed = JSON.parse(cachedUser);
-      if (Date.now() - parsed.timestamp < 1000 * 60 * 5) { // 5 min expiry
+      if (Date.now() - parsed.timestamp < 1000 * 60 * 5) {
         setUser(parsed.data);
         setLoadingUser(false);
       }
@@ -47,7 +47,7 @@ export default function Dashboard() {
       });
   }, [navigate]);
 
-  // 💰 Fetch balance with cache
+  // 💰 Fetch balance
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -81,31 +81,31 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-[url('/src/assets/download.jpg')] bg-cover bg-fixed bg-center bg-no-repeat">
+    <div className="min-h-screen w-full bg-[url('/src/assets/download.jpg')] bg-cover bg-fixed bg-center bg-no-repeat overflow-x-hidden">
       <div className="flex flex-col w-full min-h-screen items-center">
 
         {/* 🔷 HEADER */}
-        <div className="flex justify-between items-center mt-6 px-8 py-3 
+        <div className="flex justify-between items-center mt-6 px-5 md:px-8 py-3 
                         bg-gradient-to-r from-zinc-800/70 to-zinc-700/60 
                         backdrop-blur-xl border border-zinc-600/30 
                         rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] 
-                        w-full max-w-[1450px] h-20 mx-auto relative z-40 
+                        w-[97%] md:w-[97%] lg:w-[97%] xl:w-[97%]  h-20 mx-auto relative z-40 
                         transition-all duration-300 hover:shadow-[0_6px_25px_rgba(0,0,0,0.45)]">
+
           {/* Left */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full 
-                            flex items-center justify-center text-white font-bold text-xl 
-                            shadow-md">
+                            flex items-center justify-center text-white font-bold text-xl shadow-md">
               💸
             </div>
-            <h1 className="text-2xl md:text-3xl font-semibold text-white tracking-wide">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white tracking-wide">
               Payment <span className="text-blue-400">App</span>
             </h1>
           </div>
 
           {/* Right */}
-          <div className="flex justify-end items-center gap-5 pr-5">
-            <p className="text-gray-200 text-lg font-medium transition-opacity duration-500">
+          <div className="flex justify-end items-center gap-4 md:gap-5 pr-3 md:pr-5">
+            <p className="text-gray-200 text-sm sm:text-lg font-medium transition-opacity duration-500">
               {loadingUser ? (
                 <span className="animate-pulse text-gray-500">Loading...</span>
               ) : (
@@ -119,11 +119,12 @@ export default function Dashboard() {
         </div>
 
         {/* 💰 BALANCE CARD */}
-        <div className="w-350 h-32 bg-zinc-800/60 backdrop-blur-md mt-10 rounded-2xl 
+        <div className="w-[97%] md:w-[97%] lg:w-[97%] xl:w-[97%] 2xl:w-[97%]
+                        bg-zinc-800/60 backdrop-blur-md mt-10 rounded-2xl 
                         border border-zinc-600/40 shadow-lg hover:shadow-xl 
-                        transform hover:scale-[1.02] transition-all duration-300">
-          <div className="text-white text-3xl font-semibold pl-6 pt-5">Your Balance</div>
-          <div className="text-blue-400 text-4xl pl-6 pt-3 font-bold tracking-wide transition-opacity duration-500">
+                        transform hover:scale-[1.02] transition-all duration-300 p-6">
+          <div className="text-white text-2xl md:text-3xl font-semibold">Your Balance</div>
+          <div className="text-blue-400 text-3xl md:text-4xl font-bold tracking-wide mt-2 transition-opacity duration-500">
             {loadingBalance
               ? <span className="animate-pulse text-gray-500">Loading...</span>
               : `₹ ${balance?.toFixed(2)}`}
@@ -131,7 +132,7 @@ export default function Dashboard() {
         </div>
 
         {/* 🔍 SEARCH BAR */}
-        <div className="flex justify-start items-center mt-10 w-350 h-14 
+        <div className="flex justify-start items-center mt-10 w-[97%] md:w-[97%] lg:w-[97%] xl:w-[97%] 2xl:w-[97%] h-14 
                         bg-zinc-800/60 backdrop-blur-md rounded-2xl px-5 
                         border border-zinc-700/40 shadow-md focus-within:ring-2 ring-blue-400/60 transition-all">
           <svg
@@ -148,13 +149,12 @@ export default function Dashboard() {
             type="text"
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search for a person..."
-            className="flex-1 bg-transparent text-white text-lg focus:outline-none 
-                       placeholder-gray-400"
+            className="flex-1 bg-transparent text-white text-lg focus:outline-none placeholder-gray-400"
           />
         </div>
 
         {/* 👥 PERSON LIST */}
-        <div className="mt-8 mb-8 w-full flex justify-center">
+        <div className="mt-8 mb-8 w-full flex justify-center px-2">
           <Person search={search} />
         </div>
 
