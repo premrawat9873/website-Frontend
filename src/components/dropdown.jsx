@@ -36,7 +36,10 @@ export default function DropdownButton({ user }) {
       : "U";
 
   return (
-    <div className="relative inline-block text-left" ref={menuRef}>
+    <div
+      className="relative inline-block text-left z-[9999]" // ✅ Highest layer
+      ref={menuRef}
+    >
       {/* Button */}
       <button
         type="button"
@@ -48,7 +51,8 @@ export default function DropdownButton({ user }) {
       >
         {initials}
         <svg
-          className="ml-1 h-3 w-3 text-white"
+          className="ml-1 h-3 w-3 text-white transition-transform duration-200"
+          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -66,7 +70,7 @@ export default function DropdownButton({ user }) {
         <div
           className="origin-top-right absolute right-0 mt-2 w-44 rounded-md 
                      shadow-lg bg-zinc-800/95 text-white ring-1 ring-zinc-700 
-                     backdrop-blur-md z-50"
+                     backdrop-blur-md z-[10000] animate-fadeIn"
         >
           <div className="py-1">
             {/* Profile */}

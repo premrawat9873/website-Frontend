@@ -89,7 +89,6 @@ export default function Payment() {
     }
   };
 
-  // ✨ Derived UI values
   const senderFirst = capitalize(sender?.firstName);
   const receiverFirst = capitalize(user?.firstName);
   const receiverLast = capitalize(user?.lastName);
@@ -108,17 +107,20 @@ export default function Payment() {
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
       {/* 🌄 Background */}
-      <div className="absolute inset-0 bg-[url('/src/assets/download.jpg')] bg-cover bg-center bg-no-repeat"></div>
+      <div className="absolute inset-0 bg-[url('/src/assets/download.jpg')] bg-cover bg-center bg-no-repeat z-0"></div>
 
       {/* 🧊 Overlay */}
-      <div className="absolute inset-0 bg-zinc-900/50 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-zinc-900/50 backdrop-blur-sm z-10"></div>
 
       {/* 🌟 Main Content */}
-      <div className="relative z-10 p-4 flex flex-col items-center">
+      <div className="relative z-20 p-4 flex flex-col items-center">
         {/* 🔹 Navbar */}
-        <div className="flex justify-between items-center mt-4 px-6 py-3 w-full max-w-5xl 
-                        bg-zinc-800/70 backdrop-blur-lg rounded-xl border border-zinc-600/40 
-                        shadow-lg transition-all duration-300 hover:shadow-xl">
+        <div
+          className="flex justify-between items-center mt-4 px-6 py-3 w-full max-w-5xl 
+                     bg-zinc-800/70 backdrop-blur-lg rounded-xl border border-zinc-600/40 
+                     shadow-lg transition-all duration-300 hover:shadow-xl z-30"
+        >
+          {/* Back Arrow */}
           <svg
             onClick={() => navigate("/dashboard")}
             xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +133,8 @@ export default function Payment() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12l7.5-7.5M3 12h18" />
           </svg>
 
-          <div className="flex items-center gap-4 text-white">
+          {/* Dropdown + Greeting */}
+          <div className="flex items-center gap-4 text-white relative z-50">
             <span className="hidden md:block text-lg">
               Hello, <span className="text-blue-400">{senderFirst || "..."}</span>
             </span>
@@ -140,16 +143,20 @@ export default function Payment() {
         </div>
 
         {/* 💳 Payment Card */}
-        <div className="flex flex-col items-center mt-16 w-[360px] sm:w-[400px] 
-                        bg-zinc-800/80 backdrop-blur-md border border-zinc-700/40 
-                        rounded-2xl shadow-xl p-8 space-y-5 hover:shadow-2xl 
-                        transition-all duration-300">
+        <div
+          className="flex flex-col items-center mt-16 w-[360px] sm:w-[400px] 
+                     bg-zinc-800/80 backdrop-blur-md border border-zinc-700/40 
+                     rounded-2xl shadow-xl p-8 space-y-5 hover:shadow-2xl 
+                     transition-all duration-300 z-20"
+        >
           <Heading text="Payment" />
 
           {/* 👤 Receiver Avatar */}
-          <div className="flex items-center justify-center w-20 h-20 rounded-full 
-                          bg-gradient-to-r from-blue-400 to-cyan-400 text-black 
-                          font-bold text-2xl shadow-lg">
+          <div
+            className="flex items-center justify-center w-20 h-20 rounded-full 
+                       bg-gradient-to-r from-blue-400 to-cyan-400 text-black 
+                       font-bold text-2xl shadow-lg"
+          >
             {receiverInitials || "?"}
           </div>
 
