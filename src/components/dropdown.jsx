@@ -9,6 +9,7 @@ export default function DropdownButton({ user }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
+  // Close menu when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -19,12 +20,20 @@ export default function DropdownButton({ user }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     setToken(null);
     setIsOpen(false);
     navigate("/signin");
   };
+
+  // Profile initials
+  const initials =
+    user && user.firstName
+      ? user.firstName[0].toUpperCase() +
+        (user.lastName ? user.lastName[0].toUpperCase() : "")
+      : "U";
 
   return (
     <div className="relative inline-block text-left" ref={menuRef}>
@@ -37,11 +46,7 @@ export default function DropdownButton({ user }) {
                    backdrop-blur-md border border-zinc-600 hover:bg-zinc-600 
                    transition-all duration-200"
       >
-        {user && user.firstName ? 
-          (user.firstName[0].toUpperCase() + user.firstName[1].toUpperCase())
-          : 'U'
-        }
-
+        {initials}
         <svg
           className="ml-1 h-3 w-3 text-white"
           xmlns="http://www.w3.org/2000/svg"
@@ -64,15 +69,18 @@ export default function DropdownButton({ user }) {
                      backdrop-blur-md z-50"
         >
           <div className="py-1">
+            {/* Profile */}
             <button
               className="block px-4 py-2 text-sm text-gray-200 hover:bg-zinc-700/70 w-full text-left"
               onClick={() => {
                 setIsOpen(false);
-                navigate("/profile");
+                navigate("/profile", { state: { user } }); // ✅ Pass user info
               }}
             >
               Profile
             </button>
+
+            {/* Update */}
             <button
               className="block px-4 py-2 text-sm text-gray-200 hover:bg-zinc-700/70 w-full text-left"
               onClick={() => {
@@ -82,6 +90,8 @@ export default function DropdownButton({ user }) {
             >
               Update
             </button>
+
+            {/* Logout */}
             <button
               className="block px-4 py-2 text-sm text-red-400 hover:bg-zinc-700/70 w-full text-left"
               onClick={handleLogout}
